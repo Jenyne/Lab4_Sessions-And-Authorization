@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Login
-    Created on : Oct 8, 2020, 12:06:00 PM
+    Document   : Home
+    Created on : Oct 8, 2020, 12:53:24 PM
     Author     : Nykke
 --%>
 
@@ -9,9 +9,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Home Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Home Page</h1>
+        <h4>Hello ${User}</h4>
+        <a href name ="logout" value="">Logout</a>
     </body>
 </html>
