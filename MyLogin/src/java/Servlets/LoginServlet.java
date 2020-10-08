@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -39,11 +40,21 @@ public class LoginServlet extends HttpServlet {
         User user = ac.login(username,password);
         // pass user/password to accserv.login(). If user = user then do.
         
-        
-            if(true){
-                getServletContext().getRequestDispatcher("/WEB-INF/login.jsp")
+        if (user != null) {
+            String curuser = user.getUsername();
+            if(curuser == "adam" || curuser == "betty"){
+                 //response.sendRedirect(request.getContextPath() + "/home");
+                 getServletContext().getRequestDispatcher("/WEB-INF/home.jsp")
                 .forward(request, response);
             }
+            else if (curuser=="admin"){
+            }
+                HttpSession session = request.getSession();
+                session.setAttribute("user", user);
+        }
+            
+        
+            
     }
 
     @Override

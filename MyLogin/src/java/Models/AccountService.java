@@ -13,26 +13,33 @@ public class AccountService {
 
     public User login(String username, String password) {
         User user = new User();
+        
         switch (username) {
             case "adam":
-                if (password == "password") {
+                if (password.equals("password")) {
                     user.setUsername("adam");
+                    user.setPassword("");
                     return user;
                 }
                 break;
             case "betty":
-                if (password == "password") {
+                if (password.equals("password")) {
                     user.setUsername("betty");
+                    user.setPassword("");
                     return user;
                 }
                 break;
             case "admin":
-                if (password == "password") {
+                if (password.equals("password")) {
                     user.setUsername("admin");
+                    user.setPassword("");
                     return user;
                 }
                 break;
+            default:
+                user = null;
         }
         return user;
+
     }
 }
