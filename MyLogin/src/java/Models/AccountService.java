@@ -20,6 +20,10 @@ public class AccountService {
                     user.setUsername("adam");
                     user.setPassword("");
                     return user;
+                }else if(!password.equals("password")) {
+                    user.setUsername("Wrong Username or Password");
+                    user.setPassword("");
+                    return user;
                 }
                 break;
             case "betty":
@@ -27,11 +31,19 @@ public class AccountService {
                     user.setUsername("betty");
                     user.setPassword("");
                     return user;
+                }else if(!password.equals("password")) {
+                    user.setUsername("Wrong Username or Password");
+                    user.setPassword("");
+                    return user;
                 }
                 break;
             case "admin":
                 if (password.equals("password")) {
                     user.setUsername("admin");
+                    user.setPassword("");
+                    return user;
+                }else if(!password.equals("password")) {
+                    user.setUsername("Wrong Username or Password");
                     user.setPassword("");
                     return user;
                 }

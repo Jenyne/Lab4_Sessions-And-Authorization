@@ -3,7 +3,7 @@
     Created on : Oct 8, 2020, 12:06:00 PM
     Author     : Nykke
 --%>
-
+<%@ page session="false" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -19,6 +19,7 @@
             <label>Password: </label>
             <input type="password" name ="password"><br>
             <button type ="submit" >Login</button>
+            <p>${message}</p>
         </form>
     </body>
 </html>
