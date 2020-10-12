@@ -15,7 +15,7 @@
         <h1> Login</h1>
         <form action ="login" method="POST" autocomplete="off">
             <label>Username: </label>
-            <input type="text" name ="username"><br>
+            <input type="text" name ="username" value="${username}"><br>
             <label>Password: </label>
             <input type="password" name ="password"><br>
             <button type ="submit" >Login</button>

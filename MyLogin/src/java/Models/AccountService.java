@@ -13,7 +13,7 @@ public class AccountService {
 
     public User login(String username, String password) {
         User user = new User();
-        
+        username = username.toLowerCase();
         switch (username) {
             case "adam":
                 if (password.equals("password")) {
