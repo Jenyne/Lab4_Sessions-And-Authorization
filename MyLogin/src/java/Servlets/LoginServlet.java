@@ -31,26 +31,26 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if ("true".equals(session.getAttribute(loggedin))) {
-                response.sendRedirect(request.getContextPath() + "/home");
-            } else {
-        if (session.isNew()) {
-            if (session.getAttribute(userloginname) != null) {
-
-                getServletContext().getRequestDispatcher("/WEB-INF/login.jsp")
-                        .forward(request, response);
-
-            }else if (session.getAttribute(userloginname) == null){
-                getServletContext().getRequestDispatcher("/WEB-INF/login.jsp")
-                        .forward(request, response);
-                }
-            else {
-                getServletContext().getRequestDispatcher("/WEB-INF/home.jsp")
-                        .forward(request, response);
-            }
-
+        String url = request.getServletPath();
+        if ("true".equals(session.getAttribute(loggedin)) && url == "/login") {
+            response.sendRedirect(request.getContextPath() + "/home");
         } else {
-            
+            if (session.isNew()) {
+                if (session.getAttribute(userloginname) != null) {
+
+                    getServletContext().getRequestDispatcher("/WEB-INF/login.jsp")
+                            .forward(request, response);
+
+                } else if (session.getAttribute(userloginname) == null) {
+                    getServletContext().getRequestDispatcher("/WEB-INF/login.jsp")
+                            .forward(request, response);
+                } else {
+                    getServletContext().getRequestDispatcher("/WEB-INF/home.jsp")
+                            .forward(request, response);
+                }
+
+            } else {
+
                 getServletContext().getRequestDispatcher("/WEB-INF/login.jsp")
                         .forward(request, response);
             }
@@ -79,12 +79,17 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/home");
             }
         } else {
-            request.setAttribute("message", user.getUsername());
+            try{ 
+                request.setAttribute("message", user.getUsername());
+            }catch(NullPointerException e) {
+                request.setAttribute("message","Wrong username or Password"); 
             String curuser = request.getParameter("username");
             request.setAttribute("username", curuser);
             session.setAttribute("loggedin", "false");
             getServletContext().getRequestDispatcher("/WEB-INF/login.jsp")
                     .forward(request, response);
+        }
+        
 
         }
     }
