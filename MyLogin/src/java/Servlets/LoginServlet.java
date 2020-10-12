@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
         HttpSession session = request.getSession(false);
         AccountService ac = new AccountService();
         String username = request.getParameter("username");
