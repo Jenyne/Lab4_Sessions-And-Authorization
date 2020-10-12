@@ -27,10 +27,10 @@ public class HomeServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         String curuser = (String) session.getAttribute("userloginname");
         if (curuser != null) {
-
-            getServletContext().getRequestDispatcher("/WEB-INF/home.jsp")
-                    .forward(request, response);
-
+            
+                getServletContext().getRequestDispatcher("/WEB-INF/home.jsp")
+                        .forward(request, response);
+            
         } else if ("adam".equals(curuser) || "betty".equals(curuser) || "admin".equals(curuser)) {
             session.setAttribute("userloginname", curuser);
             response.sendRedirect(request.getContextPath() + "/home");
@@ -48,7 +48,7 @@ public class HomeServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         if ("logout".equals(request.getParameter("logout"))) {
             if (session.getAttribute("userloginname") != null) {
-                //session.removeAttribute("userloginname");
+                session.removeAttribute("userloginname");
                 session.invalidate();
                 response.sendRedirect(request.getContextPath() + "/login");
             }

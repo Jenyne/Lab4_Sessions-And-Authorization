@@ -25,25 +25,42 @@ import javax.servlet.http.HttpSession;
 public class LoginServlet extends HttpServlet {
 
     String userloginname;
+    String loggedin = "false";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if (session.getAttribute(userloginname) != null) {
-            getServletContext().getRequestDispatcher("/WEB-INF/home.jsp")
-                    .forward(request, response);
-        } else {
-            getServletContext().getRequestDispatcher("/WEB-INF/login.jsp")
-                    .forward(request, response);
-        }
+        if ("true".equals(session.getAttribute(loggedin))) {
+                response.sendRedirect(request.getContextPath() + "/home");
+            } else {
+        if (session.isNew()) {
+            if (session.getAttribute(userloginname) != null) {
 
+                getServletContext().getRequestDispatcher("/WEB-INF/login.jsp")
+                        .forward(request, response);
+
+            }else if (session.getAttribute(userloginname) == null){
+                getServletContext().getRequestDispatcher("/WEB-INF/login.jsp")
+                        .forward(request, response);
+                }
+            else {
+                getServletContext().getRequestDispatcher("/WEB-INF/home.jsp")
+                        .forward(request, response);
+            }
+
+        } else {
+            
+                getServletContext().getRequestDispatcher("/WEB-INF/login.jsp")
+                        .forward(request, response);
+            }
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         HttpSession session = request.getSession(false);
         AccountService ac = new AccountService();
         String username = request.getParameter("username");
@@ -53,15 +70,19 @@ public class LoginServlet extends HttpServlet {
             String curuser = user.getUsername();
             if ("adam".equals(curuser) || "betty".equals(curuser)) {
                 session.setAttribute("userloginname", curuser);
+                session.setAttribute("loggedin", "true");
                 response.sendRedirect(request.getContextPath() + "/home");
+
             } else if (curuser == "admin") {
                 session.setAttribute("userloginname", curuser);
+                session.setAttribute("loggedin", "true");
                 response.sendRedirect(request.getContextPath() + "/home");
             }
         } else {
             request.setAttribute("message", user.getUsername());
             String curuser = request.getParameter("username");
             request.setAttribute("username", curuser);
+            session.setAttribute("loggedin", "false");
             getServletContext().getRequestDispatcher("/WEB-INF/login.jsp")
                     .forward(request, response);
 
@@ -73,5 +94,4 @@ public class LoginServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    
 }

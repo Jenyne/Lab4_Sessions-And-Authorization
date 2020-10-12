@@ -15,9 +15,11 @@
     </head>
     <body>
         <form action="" method="POST">
-        <h1>Home Page</h1>
-        <h4><%="Hello " +  session.getAttribute("userloginname")%></h4>
-        <button type="submit" name ="logout" value="logout">Logout</button>
+            <h1>Home Page</h1>
+            <h4><%="Hello " + session.getAttribute("userloginname")%></h4>
+            <button type="submit" name ="logout" value="logout" 
+                    style="background:none!important;border:none; padding:0!important;font-family:arial,
+                    sans-serif;color:#069;cursor:pointer;">Logout</button>
         </form>
     </body>
 </html>
